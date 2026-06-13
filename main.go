@@ -14,7 +14,7 @@ type Komentar struct {
 	Sentimen string
 }
 
-// Menggunakan variabel global (standar pemula)
+// Menggunakan variabel global 
 var dataKomentar []Komentar
 var idSekarang = 1
 
@@ -28,7 +28,7 @@ func cekSentimen(teks string) string {
 	
 	skor := 0
 
-	// Pencocokan kata utuh (bukan substring)
+	// Pencocokan kata utuh 
 	for _, kata := range kataKata {
 		// Cek daftar positif
 		for _, pos := range kataPositif {
@@ -105,29 +105,29 @@ func cariSequential(keyword string) {
 	}
 }
 
-// Binary Search (Pencarian Teks Persis)
+// Binary Search
 func cariBinary(target string) {
-	low := 0
-	high := len(dataKomentar) - 1
+	left := 0
+	right := len(dataKomentar) - 1
 	target = strings.ToLower(target)
 
-	for low <= high {
-		mid := (low + high) / 2
+	for left <= right {
+		mid := (left + right) / 2
 		teksMid := strings.ToLower(dataKomentar[mid].Teks)
 
 		if teksMid == target {
 			fmt.Printf("Ditemukan -> ID: %d | Sentimen: %-7s | Teks: %s\n", dataKomentar[mid].ID, dataKomentar[mid].Sentimen, dataKomentar[mid].Teks)
 			return
 		} else if teksMid < target {
-			low = mid + 1
+			left = mid + 1
 		} else {
-			high = mid - 1
+			right = mid - 1
 		}
 	}
 	fmt.Println("Komentar tidak ditemukan (Catatan: Binary Search butuh data yang disortir secara alfabet).")
 }
 
-// Selection Sort (Berdasarkan Panjang Teks)
+// Selection Sort 
 func urutkanPanjangTeks() {
 	n := len(dataKomentar)
 	for i := 0; i < n-1; i++ {
@@ -137,7 +137,7 @@ func urutkanPanjangTeks() {
 				minIndex = j
 			}
 		}
-		// Tukar posisi (Swap)
+		// Tukar posisi nya lek
 		temp := dataKomentar[i]
 		dataKomentar[i] = dataKomentar[minIndex]
 		dataKomentar[minIndex] = temp
@@ -145,7 +145,7 @@ func urutkanPanjangTeks() {
 	fmt.Println("Berhasil disortir dari teks terpendek ke terpanjang.")
 }
 
-// Fungsi Bantuan untuk Insertion Sort
+// Fungsi untuk Insertion Sort
 func angkaSentimen(s string) int {
 	if s == "positif" {
 		return 1
@@ -155,7 +155,7 @@ func angkaSentimen(s string) int {
 	return 3 // negatif
 }
 
-// Insertion Sort (Berdasarkan Tingkat Sentimen)
+// Insertion Sort
 func urutkanSentimen() {
 	n := len(dataKomentar)
 	for i := 1; i < n; i++ {
@@ -218,7 +218,6 @@ func main() {
 		fmt.Println("0. Keluar")
 		fmt.Print("Pilih Menu: ")
 
-		// Membaca input menu
 		scanner.Scan()
 		pilihan := scanner.Text()
 
